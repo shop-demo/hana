@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\productController;
 use App\Http\Controllers\admin\bannerController;
 use App\Http\Controllers\admin\activeController;
 use App\Http\Controllers\admin\khachhangController;
+use App\Http\Controllers\admin\roleController;
 
 
 /*
@@ -86,6 +87,15 @@ Route::group(['prefix'=>'admin','middleware'=>'cus'], function () {
 	Route::put('/activeCustomes/{id}',[activeController::class,'activeCustomes'])->name('admin.activeCustomes');
 	Route::put('/notActiveCustomes/{id}',[activeController::class,'notActiveCustomes'])->name('admin.notActiveCustomes');
 	//active
+
+	/*--roles---------------------
+	------------------------------*/
+	Route::get('/roleList',[roleController::class,'index'])->name('admin.roleList');
+	Route::get('/roleAdd',[roleController::class,'create'])->name('admin.roleAdd');
+
+	/*Login tài khoản admin */
+
+	
 
 });
 //ajax

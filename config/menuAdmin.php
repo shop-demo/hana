@@ -59,6 +59,21 @@
 							]
 						],
 
+						//routers
+						[
+							'name'=>'Routers',
+							'route'=>'admin.roleList',
+							'items'=>[
+									['name'=>'List Route',
+									 'route'=>'admin.roleList',	
+									],
+									['name'=>'Add Route',
+									 'route'=>'admin.roleAdd',	
+									]								
+
+							]
+						],
+
 			
 
 

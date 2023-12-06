@@ -42,9 +42,8 @@
 						  <div class="p-2 ">
 						 	<div class="d-flex justify-content-between ">
 							  <div class="p-2 ">
-							  	<a href="{{route('admin.customeAdd')}}"  class="btn btn-success">Thêm mới</a>
-							  	<a href="{{route('admin.customeDestroy')}}"  class="btn btn-danger deleteAll" 
-							  	data-id="{{route('admin.customeList')}}">Delete-All</a>
+							  	<a href="{{route('admin.roleAdd')}}"  class="btn btn-success">Thêm mới</a>
+							  	<a href=""  class="btn btn-danger allDelete">Delete-All</a>
 
 							  </div>
 							  <div class=" p-2">
@@ -62,7 +61,7 @@
 						<div class="col-12">
 							
 							<!-- Table with stripped rows -->
-							<form action="" method="POST" id="form_customeDestroy">
+							<form action="" method="POST" id="deleteAll">
 								@csrf @method('delete')
 								<table class="table">
 									<thead>
@@ -70,43 +69,34 @@
 											<th style="width:2px;height:auto;">#</th>
 											<th><input class="form-check-input" type="checkbox" id="check1" name="check-all" value="something" ></th>
 											<th scope="col">Name</th>
-											<th scope="col">Email</th>
-											<th scope="col">remember_token</th>
+											<th scope="col">role</th>
 											<th scope="col">Status</th>
-											<th scope="col">Role</th>
 											<th scope="col">created_at</th>
 											<th scope="col">Action</th>
 										</tr>
 									</thead>
 									<tbody>
-										@foreach($dataCus as $key=>$list)
+									@foreach($dataRole as $key=>$listRole)
 										<tr>
 											<td>{{$key+1}}</td>
-											<td ><input class="form-check-input" type="checkbox"  name="check[]" value="{{$list->id}}" ></td>
-											<td>{{$list->name}}</td>
-											<td>{{$list->email}}</td>
-											<td>{{$list->remember_token}}</td>
+											<td ><input class="form-check-input" type="checkbox" id="check1" name="option[]" value="" ></td>
+											<td>{{$listRole->name}}</td>
+											<td>{{$listRole->role}}</td>
 											<td>
-											<form action="" method="POST" id="form_active">
-												@csrf @method('PUT')
-											@if($list->status == 0)
-												<a href="{{route('admin.activeCustomes',['id'=>$list->id])}}" class="badge bg-danger btn_cusNotActive">Ẩn</a>
-											@else
-												<a href="{{route('admin.notActiveCustomes',['id'=>$list->id])}}" class="badge bg-success btn_cusActive">Hiện</a>
-											@endif	
-											</form>
+												@if($listRole->status==0)
+												<span class="badge bg-danger" >Ẩn</span>
+												@else
+												<span class="badge bg-info" >hiện</span>
+												@endif
 											</td>
-											<td>{{$list->role}}</td>
-											<td>{{$list->created_at == null ? '' : $list->created_at->format('m-d-Y')}}</td>
+											<td>{{$listRole->created_at == null ? '' : $listRole->created_at->format('m-d-Y')}}</td>
 											
 											<td>
 												<div class="d-flex">
-													<a href="" class="btn btn-primary">Add-role</a>
-													<a href="{{route('admin.customeEdit',['id'=>$list->id])}}" class="btn btn-info btn-sm ms-1">Edit</a>
-
-													<form method="post" action="" id="form_cusDelete">
+													<a href="" class="btn btn-info btn-sm">Edit</a>
+													<form method="post" action="" id="form-delete">
 													 @csrf @method('delete')
-														<a href="{{route('admin.customeDelete',['id'=>$list->id])}}" class="btn btn-secondary btn-sm ms-1 customeDelete"><i class="fa fa-trash-o"></i>
+														<a href="" class="btn btn-secondary btn-sm ms-1 categoryDelete"><i class="fa fa-trash-o"></i>
 														</a>
 													</form>
 
@@ -114,8 +104,8 @@
 											</td>
 											
 										</tr>
-										@endforeach
 										
+									@endforeach	
 
 									</tbody>
 								</table>
@@ -148,5 +138,15 @@
 
 @endsection
 @section('js')
-	<script src="{{url('public/admins')}}/jquery/deleteCustomers.js" type="text/javascript" charset="utf-8" async defer></script>
+
+<script type="text/javascript">
+	$.ajaxSetup({
+	    headers: {
+	        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+
+</script>
+ <script src=""></script>
+
 @endsection

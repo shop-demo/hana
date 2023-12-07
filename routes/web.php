@@ -9,7 +9,7 @@ use App\Http\Controllers\admin\bannerController;
 use App\Http\Controllers\admin\activeController;
 use App\Http\Controllers\admin\khachhangController;
 use App\Http\Controllers\admin\roleController;
-
+use App\Http\Controllers\admin\userNameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,8 +94,8 @@ Route::group(['prefix'=>'admin','middleware'=>'cus'], function () {
 	Route::get('/roleAdd',[roleController::class,'create'])->name('admin.roleAdd');
 
 	/*Login tài khoản admin */
+	Route::get('/login',[userNameController::class,'index'])->name('admin.login');
 
-	
 
 });
 //ajax
